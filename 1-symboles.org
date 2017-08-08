@@ -1,0 +1,177 @@
+#+title: Brainsfeed - Uncourse
+#+subtitle: 1 - Symboles, Listes, S-Expressions
+#+date: \today
+
+--------
+
+
+* Symboles
+
+Un symbole est une chose qui en symbolise une autre.
+Par exemple une icone désigne un concept. Elle symbolise ce concept.
+
+| Symbole  | description                   | Symbolise     |
+|----------+-------------------------------+---------------|
+| :banana:     | l'image stylisée d'une banane | un vrai fruit |
+| banane   | Un mot                        | un vrai fruit |
+
+
+#+CAPTION: /La Trahison des images/, 	René Magritte
+#+NAME:   fig:magritte
+#+ATTR_LaTeX:  :placement [!H]
+[[./imgs/magritte_trahison.jpg]]
+
+
+Par exemple ~banane~,  ~pomme~ et ~tarte~ sont des symboles.
+Ils désignent chacuns quelque chose.
+Mais attention  ~tarte aux pommes~ n'est pas un symbole dans notre cas. C'est trois symboles:
+- le symbole ~tarte~,
+- le symbole ~aux~,
+- le symbole ~pommes~.
+
+** Les symboles peuvent êtres égaux ou non
+
+\begin{align*}
+  tarte &= tarte \\
+  pomme &= pomme \\
+  pommes &= pommes \\
+  pomme &\neq pommes 
+\end{align*}
+
+Deux symboles sont égaux s'ils désignent la même chose.
+
+** Il est impossible de découper les symboles
+   
+ Si on "coupe" un symbole et qu'on obtient un symbole équivalent, alors on a juste trouvé un
+ autre symbole.
+
+ En d'autres termes, on peut combiner les concepts, mais pas les symboles. On ne peut
+ pas découper un symbole, car si on trouve un symbole plus petit, qui fait
+ référence au même concept, alors on à trouvé un autre symbole, égal au premier.
+ Par exemple: 
+
+\begin{align*}
+ pom &\neq pomme \\
+ ban &\neq banane \\
+ coca &\neq cocaCola
+\end{align*}
+
+ Ici ~coca~ et ~coca-cola~ désignent bien la même boisson. Mais ~coca~ et ~coca-cola~ ne sont pas le même symbole.
+
+ 
+** Symboles étranges
+
+   Selon la rêgle précédente ~pomme~, ~pomme1~, ~pomme2~ et ~pomme?~ sont 4 symboles
+distincts. Pourtant ~pom me~ sont deux symboles.
+
+*Définition:* Un symbole est une suite de caractères contiguës:
+- exepté l'espace : " ",
+- exepté les parenthèses : "(" et ")".
+
+*** Exemples
+
+Symboles invalides:
+#+BEGIN_SRC 
+    tar(te
+    pom)me
+    b)ana(ne
+#+END_SRC
+
+Symboles valides:    
+#+BEGIN_SRC 
+    tarte1 
+    pomme?
+    banane#23
+    01/01/2018
+    42
+    ¿que?
+    #Yolo
+#+END_SRC
+
+* Listes
+
+  Pourquoi les parenthèses sont interdites dans les symboles? Car on en a besoin pour autre chose.
+
+#+BEGIN_SRC elisp
+  (tarte)
+  (tarte aux pommes)
+  ()
+#+END_SRC
+
+  Voici trois listes. la première liste ~(tarte)~ contient un symbole, le
+  symbole ~tarte~. la seconde contient trois symboles, le symbole ~tarte~, le
+  symbole ~aux~ et le symbole ~pomme~. La dernière liste ~()~ ne contient aucun
+  symbole. On l'appel la liste vide. Parfois on lui donne un symbole spécial : $\varnothing$.
+
+
+  Une liste c'est donc tout ce qui se trouve entre deux parenthèses, une ouvrante et une fermante.
+
+  Il est possible d'imbirquer les listes:
+
+#+BEGIN_SRC  emacs-lisp
+  (tarte (aux pommes))
+
+  (voiture
+   (marque Tesla)
+   (options (autopilote climatisation GPS))
+   (couleur noir))
+#+END_SRC
+
+* Grammaire
+
+#+BEGIN_SRC 
+S = symbole
+  | liste
+liste = (  symbole*  )
+symbole = caractère+
+#+END_SRC
+
+* Exemples
+
+**** Liste de courses:
+
+#+BEGIN_SRC 
+((1 paquetDeFrite)
+ (5 tomate)
+ (1 basilic)
+ (1 brosseADents)
+ (1 mozzarella))
+
+(liste-de-courses 08/08 
+ (1 paquetDeFrite)
+ (3 tomate verte)
+ (6 œuf bio)
+ (1 pizza)
+ (2 vin blanc))
+#+END_SRC
+
+**** Étudiants 
+
+#+BEGIN_SRC 
+
+(étudiant
+ (classe CM2)
+ (nom Denis)
+ (prénom Guillaume)
+ (age 10))
+#+END_SRC
+
+**** Étranges mais valides
+
+#+BEGIN_SRC 
+((((pizza))))
+
+(+
+ (- 3
+    (/ 4
+       5))
+ (* 7
+    3))
+
+(+ (- 3 (/ 4 5)) (* 7 3)) 
+
+#+END_SRC
+   
+------------------------------
+
+

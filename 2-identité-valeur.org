@@ -1,0 +1,102 @@
+#+title: Brainsfeed - Uncourse
+#+subtitle: 1 - Identité et Valeur
+#+date: \today
+
+--------
+
+
+* Identité / Valeur
+# expliquer d'avantage 
+
+pomme 
+pizza
+
+(premier (tarte aux pommes))   => tarte
+(premier (quiche lorraine)) => quiche
+
+- L'identité d'une chose, c'est la chose elle même
+- La valeur d'une chose, c'est ce à quoi elle 
+fait référence, selon sa définition
+
+(premier (a b c)) => a
+(premier ())      => Ø = ()
+(premier)         => pas de réponse
+
+(premier ((tarte) (aux) (pommes))) => (tarte)
+(premier (()))  => ()   Ø = {} = ()
+
+(premier ((1 2) (3))) => (1 2)
+
+ ~premier~ renvoi la première S-Expression de la liste qui le suit
+ ou la liste vide si cette liste est vide.
+
+(dernier (a b c))  => c
+(dernier ((a) (b) (c))) => (c)
+(dernier ()) => ()
+(dernier) => pas de réponse
+
+~dernier~ renvoi la dernière S-Exp de la liste qui le suit 
+ou la liste vide si cette liste est vide
+
+# (dernier (a b c) premier (a b c)) => c a
+
+(addition 1 2) => 3  
+(somme (1 2))
+
+(addition (addition 1 2) (addition 3 4)) = (somme (1 2 3 4)) = 10
+
+ certains symboles s'intéressent aux symboles qui le suivent
+ d'autres s'intéressent aux listes qui le suivent
+
+
+(nième (a b c) 0) => a
+(nième (a b c) 1) => b
+(nième (a b c) 2) => c
+(nième (a b c) 3) => pas de réponse
+
+(nième (a b c) 0) = (premier (a b c))
+(nième (a b c) 2) = (dernier (a b c))
+
+~nième~ prend une liste, et une position numérique et renvoi l'élément qui se trouve
+à cette position dans la liste.
+
+(suivant (a b c)) = (b c)
+(suivant (b c)) => (c)
+
+~suivant~ prend une liste, et renvoie une liste en sautant le premier élément.
+
+(suivant (suivant (suivant (a b c)))) => pas de réponse
+
+
+
+
+
+
+* Résumé
+
+  Que fait le symbole : nombre-total-d'éléments
+  lorsque 
+
+  (nombre-total-d'éléments
+    (liste-de-courses
+      (5 tomate)
+      (3 vin blanc)
+      (1 pizza)))
+
+      => 9
+  
+  (addition (premier (premier liste-de-courses))
+            (premier (nième liste-de-courses 1))
+            (premier (dernier liste-de-coures)))
+
+  (définir nombre-total-d'éléments
+    (liste-de-courses)
+    (somme (premiers liste-de-courses)))
+
+  (définir premiers (liste)
+     (extraire premier liste))
+
+  (définir extraire (symbole liste)
+     (applique symbole liste))
+ 
+
