@@ -1,0 +1,208 @@
+#+title: Brainsfeed - Uncourse
+#+subtitle: 3 - Cons
+#+date: \today
+
+--------
+
+
+
+* Rappel
+
+  Quel sont les valeurs de:
+
+#+BEGIN_SRC elisp
+(premier (tarte aux pommes))  ;; =>  tarte
+(premier ((tarte) (aux) (pommes))) ;; => (tarte)
+(premier (premier ((tarte) (aux) (pommes))))  ;; => tarte 
+#+END_SRC
+
+  Quel est la valeur de:
+
+#+BEGIN_SRC elisp
+(suivant (tarte aux pommes))  ;; => (aux pommes)
+(suivant (suivant (tarte aux pommes))) ;; =>  (pommes)
+(suivant (suivant (suivant (tarte aux pommes)))) ;; => ()
+#+END_SRC
+
+  Quel est la valeur de:
+
+#+BEGIN_SRC elisp
+(premier (suivant ((tarte) (aux) (pommes)))) ;; =>  (aux) 
+(premier (suivant (suivant ((tarte) (aux) (pommes))))) ;; => (pommes) 
+(premier (premier (suivant (suivant ((tarte) (aux) (pommes)))))) ;; => pommes 
+#+END_SRC
+
+
+* Mots-valise
+
+#+CAPTION: Une cuichette (spork)
+#+ATTR_LaTeX:  :placement [!H]
+[[./imgs/Spork.jpg]]
+
+Quel est la valeur de :
+
+#+BEGIN_SRC elisp
+(puivant ((tarte) (aux) (pommes))) ;; => (aux)
+(ppuivant ((tarte ) (aux) (pommes))) ;; => aux
+
+(sremier ((tarte aux pommes))  ;; => (aux pommes)
+#+END_SRC
+
+
+
+* Cons(truct)
+
+Quel est la valeur de :
+
+#+BEGIN_SRC elisp
+(cons tarte (aux pommes)) ;; => (tarte aux pommes)
+(cons a (b c)) ;; => (a b c)
+(cons a (cons b (c))) ;; => (a b c)
+#+END_SRC
+
+
+* Définition
+
+
+#+BEGIN_SRC elisp 
+  (definir plat (tarte aux pommes))
+  plat ;; => (tarte aux pommes)
+  (definir x 5)
+  x ;; => 5
+
+(definir x 5)
+(definir y 6)
+(definir z x)
+
+(addition x z) ;; => 10
+
+(definir nom jean)
+(definir prenom pierre)
+
+(concatenation nom prenom)  ;; => jeanpierre
+(concatenation nom   prenom)  ;; => jean pierre 
+
+#+END_SRC
+
+
+* λ Lambda 
+
+
+#+BEGIN_SRC elisp
+
+(definir x 5)
+(lambda (x) (addition x x)) 
+
+(definir y 20)
+( (lambda (x) (addition x x))  y  ) ;; => 40
+
+( (lambda (x) (addition x x))  4  ) ;; => 8
+
+( (lambda (x y) (addition x y))  2 6  ) ;; =>  8
+#+END_SRC
+
+
+#+BEGIN_SRC elisp 
+
+(définir carre
+  (lambda (x)
+    (multiplie x x)))
+
+(carre 5)  ;; 25
+
+
+(definir puivant
+  (lambda (l)
+    (premier (suivant l))))
+
+(puivant (a b c))  ;; b
+
+
+(definir sremier
+  (lambda (ll)
+    (suivant (premier ll))))
+
+
+(sremier ((tarte aux pommes))) ;; => (aux pommes)
+#+END_SRC
+
+
+#+BEGIN_SRC elisp
+
+(definir egal?
+  (lambda (x y)
+   (= x y)))
+
+(definir escargot
+  (lambda (x)
+    (cond
+      (egal? x 0) 1
+      (egal? x 1) 1
+      sinon (addition (escargot (soustraction x 1))
+                      (escargot (soustraction x 2)))))
+
+(escargot 0) ;; => 1
+(escargot 1) ;; => 1
+(escargot 2) ;; => 2
+(escargot 3) ;; => 3
+(escargot 4) ;; => 5
+
+(definir fibonacci escargot)
+(fibonacci 4) ;; => 5
+#+END_SRC
+
+
+#+BEGIN_SRC elisp
+
+(definir mystere
+  (lambda (x)
+    (cond
+      (egal? x 0) 1
+      (egal? x 1) 1
+      sinon (multiplie x (mystere (soustraction x 1))))))
+
+
+(mystere 0) ;; => 1
+(mystere 1) ;; => 1
+(mystere 2) ;; => 2
+(mystere 3) ;; => 6
+(mystere 4) ;; => 24
+(mystere 5) ;; => 120
+(mystere 6) ;; => 720
+
+
+(definir factorielle mystere)
+
+(factorielle 5) ;; => 120
+
+#+END_SRC
+
+#+BEGIN_SRC elisp
+
+(definir multiplie
+  (lambda (x y)
+    (cond
+      (zero? y) 0
+      (un? y) x
+      sinon (addition x (multiplie x (soustraction y 1))))))
+
+
+(multiplie 2 2) ;; => 4
+(multiplie 2 3) ;; => 6
+
+(definir zero?
+   (lambda (x)
+     (egal? x 0)))
+
+(definir un?
+   (lambda (x)
+     (egal? x 1)))
+
+(definir puissance
+  (lambda (x y)
+    (cond
+      (zero? y) 1
+      (un? y) x
+      sinon (multiplie x (puissance x (soustraction y 1))))))
+
+#+END_SRC
