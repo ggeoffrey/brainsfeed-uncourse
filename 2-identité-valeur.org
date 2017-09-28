@@ -17,8 +17,7 @@ pizza
 
 
 - L'identité d'une chose, c'est la chose elle même
-- La valeur d'une chose, c'est ce à quoi elle 
-fait référence, selon sa définition
+- La valeur d'une chose, c'est ce à quoi elle fait référence, selon sa définition
 
 #+BEGIN_SRC elisp
 
@@ -90,8 +89,7 @@ ou la liste vide si cette liste est vide
 
 * Résumé
 
-  Que fait le symbole : nombre-total-d'éléments
-  lorsque 
+  Que fait le symbole  ~nombre-total-d'éléments~ lorsque 
 
 #+BEGIN_SRC 
 
