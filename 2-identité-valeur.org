@@ -6,49 +6,57 @@
 
 
 * Identité / Valeur
-# expliquer d'avantage 
 
+#+BEGIN_SRC elisp
 pomme 
 pizza
 
 (premier (tarte aux pommes))   => tarte
-(premier (quiche lorraine)) => quiche
+(premier (quiche lorraine))    => quiche
+#+END_SRC
+
 
 - L'identité d'une chose, c'est la chose elle même
 - La valeur d'une chose, c'est ce à quoi elle 
 fait référence, selon sa définition
+
+#+BEGIN_SRC elisp
 
 (premier (a b c)) => a
 (premier ())      => Ø = ()
 (premier)         => pas de réponse
 
 (premier ((tarte) (aux) (pommes))) => (tarte)
-(premier (()))  => ()   Ø = {} = ()
+(premier (()))                     => ()   Ø = ()
 
-(premier ((1 2) (3))) => (1 2)
+(premier ((1 2) (3)))              => (1 2)
+#+END_SRC
 
  ~premier~ renvoi la première S-Expression de la liste qui le suit
  ou la liste vide si cette liste est vide.
 
+#+BEGIN_SRC elisp
 (dernier (a b c))  => c
 (dernier ((a) (b) (c))) => (c)
 (dernier ()) => ()
 (dernier) => pas de réponse
+#+END_SRC
 
 ~dernier~ renvoi la dernière S-Exp de la liste qui le suit 
 ou la liste vide si cette liste est vide
 
-# (dernier (a b c) premier (a b c)) => c a
 
+#+BEGIN_SRC elisp 
 (addition 1 2) => 3  
-(somme (1 2))
+(somme (1 2))  => 3
 
 (addition (addition 1 2) (addition 3 4)) = (somme (1 2 3 4)) = 10
+#+END_SRC
 
- certains symboles s'intéressent aux symboles qui le suivent
+ Certains symboles s'intéressent aux symboles qui le suivent
  d'autres s'intéressent aux listes qui le suivent
 
-
+#+BEGIN_SRC elisp
 (nième (a b c) 0) => a
 (nième (a b c) 1) => b
 (nième (a b c) 2) => c
@@ -56,17 +64,25 @@ ou la liste vide si cette liste est vide
 
 (nième (a b c) 0) = (premier (a b c))
 (nième (a b c) 2) = (dernier (a b c))
+#+END_SRC
 
 ~nième~ prend une liste, et une position numérique et renvoi l'élément qui se trouve
 à cette position dans la liste.
 
+
+#+BEGIN_SRC elisp
 (suivant (a b c)) = (b c)
 (suivant (b c)) => (c)
+#+END_SRC
 
 ~suivant~ prend une liste, et renvoie une liste en sautant le premier élément.
 
+
+#+BEGIN_SRC elisp
+
 (suivant (suivant (suivant (a b c)))) => pas de réponse
 
+#+END_SRC
 
 
 
@@ -77,26 +93,49 @@ ou la liste vide si cette liste est vide
   Que fait le symbole : nombre-total-d'éléments
   lorsque 
 
+#+BEGIN_SRC 
+
   (nombre-total-d'éléments
     (liste-de-courses
       (5 tomate)
       (3 vin blanc)
       (1 pizza)))
 
-      => 9
-  
-  (addition (premier (premier liste-de-courses))
-            (premier (nième liste-de-courses 1))
-            (premier (dernier liste-de-coures)))
-
-  (définir nombre-total-d'éléments
-    (liste-de-courses)
-    (somme (premiers liste-de-courses)))
-
-  (définir premiers (liste)
-     (extraire premier liste))
-
-  (définir extraire (symbole liste)
-     (applique symbole liste))
+   => 9
  
+#+END_SRC
 
+
+#+BEGIN_SRC elisp
+
+(définir liste-de-courses
+ ((5 tomate)
+  (3 vin blanc)
+  (1 pizza))
+  
+(addition (premier (premier liste-de-courses))
+          (premier (nième liste-de-courses 1))
+          (premier (dernier liste-de-coures)))
+
+(définir nombre-total-d'éléments
+  (liste-de-courses)
+  (somme (premiers liste-de-courses)))
+
+(définir premiers (liste)
+  (extraire premier liste))
+
+(définir extraire (symbole liste)
+  (applique symbole liste))
+
+#+END_SRC
+
+#+BEGIN_SRC elisp
+
+(définir nombre-de-tartes 5)
+(définir nombre-de-gateaux 6)
+
+(définir nombre-de-desserts (addition nombre-de-tarte nombre-de-gateaux))
+
+nombre-de-desserts  ? 
+
+#+END_SRC

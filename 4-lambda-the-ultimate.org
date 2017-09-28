@@ -1,0 +1,137 @@
+#+title: Brainsfeed - Uncourse
+#+subtitle: 4 - Lambda L'ultime
+#+date: \today
+
+--------
+
+
+* Rappel
+
+Quel est l'identité de:
+
+#+BEGIN_SRC elisp
+x ;; => x
+salade ;; => salade
+(addition 1 5) ;; => (addition 1 5)
+#+END_SRC
+
+Quel est la valeur de:
+
+#+BEGIN_SRC elisp
+(addition 1 5) ;; => 6
+(définir x 6)
+x ;; => 6
+(addition 1 x) ;; => 7
+
+
+(cons 1 ()) ;; => (1)
+(cons tarte (aux pommes)) ;; => (tarte aux pommes)
+
+(premier (tarte aux pommes)) ;; => tarte
+(dernier (tarte aux pommes)) ;; => pommes
+#+END_SRC
+
+
+Quel est la valeur de :
+
+#+BEGIN_SRC elisp
+
+(définir facto
+ (lambda (n)
+   (cond
+     (zero? n) 1
+     (un? n) 1
+     sinon (multiplie n (facto (soustraction n 1))))))
+
+(facto 4) ;; => 24
+
+#+END_SRC
+
+* Collections
+
+
+#+BEGIN_SRC elisp
+
+(contient? aux (tarte aux pommes)) ;; => vrai 
+(contient? fraise (tarte aux pommes)) ;; => faux
+
+(définir contient?
+  (lambda (sym liste)
+    (cond
+     (vide? liste) faux
+     (egal? sym (premier liste)) vrai
+     sinon (contient? sym (suivant liste)))))
+
+(contient? à (rouge à lèvres)) ;; => vrai
+
+#+END_SRC
+
+#+BEGIN_SRC elisp
+
+(définir tous-numérique?
+  (lambda (liste)
+    (cond
+     (vide? liste) faux
+     (numérique? (premier liste)) (tous-numérique? (suivant liste))
+     sinon faux)))
+
+
+(tous-numérique? (1 2 1 0 1 42)) ;; => vrai
+(tous-numérique? (1 tarte 1 9 1 42)) ;; => faux
+
+#+END_SRC
+
+
+* Lambdas
+
+Soit
+
+#+BEGIN_SRC elisp
+
+(définir plus1
+ (lambda (n)
+  (addition n 1)))
+
+(plus1 2) ;; => 3
+
+(map plus1 (1 1 1)) ;; => (2 2 2)
+(map plus1 (1 2 3)) ;; => (2 3 4)
+
+(définir moins1
+ (lambda (n)
+  (soustraction n 1)))
+
+(map moins1 (1 2 3)) ;; => (0 1 2)
+
+(définir map 
+  (lambda (f liste)
+    (cond
+      (vide? liste) ()
+      sinon (cons  (f (premier liste)) (map f (suivant liste))))))
+
+#+END_SRC
+
+
+#+BEGIN_SRC elisp
+
+(définir réduire
+  (lambda (f acc list)
+    (cond
+      (vide? liste) acc
+      sinon (réduire f (f acc (premier list)) (suivant liste)))))
+
+
+(définir plus
+   (lambda (x y)
+    (addition x y)))
+
+(réduire plus 0 (1 2 3 4)) ;; => 10
+
+(définir somme
+ (lambda (liste)
+   (réduire + 0 liste)))
+
+#+END_SRC
+
+
+

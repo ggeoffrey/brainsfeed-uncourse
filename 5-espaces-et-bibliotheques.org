@@ -1,0 +1,152 @@
+#+title: Brainsfeed - Uncourse
+#+subtitle: 5 - Espaces et Bibliothèques
+#+date: \today
+
+--------------------
+
+Doit-on toujours écrire toutes les fonctions dont on a besoin?
+Non ! On réutilise celles des autres programmeurs.
+
+
+* Strings et concaténations
+
+Qu'est ce que c'est que *une* string?
+C'est une chaîne de caractères, des caractères mis bout à bout.
+On les appellent aussi des listes de caractères.
+
+#+BEGIN_SRC elisp
+"Bonjour à tous !"
+"tarte aux pommes"
+"1"
+"2"
+#+END_SRC
+
+Quel est la valeur de:
+
+#+BEGIN_SRC elisp
+(decoupe " " "Bonjour à tous !") ;; => ("Bonjour" "à" "tous" "!")
+(taille "tarte aux pommes") ;; => 16
+(premier "tarte") ;; => "t"
+(suivant "tarte") ;; => ("a" "r" "t" "e")
+(addition "tarte" "canadaire") ;; => ERREUR
+(addition "1" "2") ;; => ERREUR
+#+END_SRC
+
+En quoi les strings sont-elles différentes des symboles ?
+
+On peut découper les strings, pas les symboles
+On peut itérer (premier, suivant,…) sur les strings, pas les symboles
+Un symbole est toujours unique, les chaines peuvent êtres multiples [fn:unicite]
+
+[fn:unicite] Un symbole ~tarte~ fait toujours référence à une seule et même chose,
+alors que la chaine ~"tarte"~ peut être stoquée à plusieurs endroits 
+mais ne fait référence à rien de particulier. C'est juste une liste de caractères.
+Elle ne symbolise aucun concept particulier. On pourrait tout aussi bien
+ l'écrire ~("t" "a" "r" "t" "e")~.
+
+
+* Bibliothèques
+
+
+Comment écrire les fonctions ~decoupe~ et ~taille~ ?
+Ce n'est pas notre problème ! Quelqu'un l'a déjà fait à notre place.
+Il nous suffit de l'importer.
+
+#+BEGIN_SRC 
+(importe tout depuis strings)
+#+END_SRC
+
+Et maintenant toutes ces fonctions sont importées:
+
+#+BEGIN_SRC elisp
+(decoupe " " "Bonjour le monde !") ;;=> ("Bonjour" "le" "monde" "!")
+(join "," ("Bonjour" "le" "monde!")) ;;=> "Bonjour,le,monde,!"
+(sousstring 0 6 "tarte aux pommes") ;;=> "tarte a"
+(contient? "aux" "tarte aux pommes") ;;=> vrai
+(taille "tarte aux pommes") ;;=> 16
+(capitalise "bonjour") ;;=> "Bonjour"
+(haut-de-casse "bonjour") ;;=> "BONJOUR" 
+(bas-de-casse "BONJOUR") ;;=> "bonjour"
+(str "Bonjour" "à" "tous") ;;=> "Bonjour à tous" 
+(formate "Bonjour %s, comment ça va ?" "Pierre") ;; => "Bonjour Pierre, comment ça va ?"
+(match "\\?$" "Il y à quelqu'un ?") ;; => vrai
+#+END_SRC
+
+
+Besoin de maths ?
+
+#+BEGIN_SRC elisp
+(importe tout depuis maths)
+#+END_SRC
+
+Et maintenant toutes ces fonctions sont importées:
+
+#+BEGIN_SRC elisp
+(pow 2 3) ;; 2 power 3 (puissance)
+(sqrt 5) ;; square root de 5 (racine carrée)
+(cos 1) ;; cosinus
+(sin 0) ;; sinus
+(tan 4) ;; tangeante
+PI ;; valeur de PI
+E ;; 
+;; Mais aussi:
+acos, asin, atan, tanh, cosh, sinh, abs, ceil, floor, round, exp, hypot, log, random,
+toDegree, toRadian, …
+
+#+END_SRC
+
+
+* Namespaces 
+
+Peut-on créer nos propres bibliothequès ? 
+Bien sûr, et c'est même encouragé. Il suffit pour ça de ranger 
+notre code proprement dans des espaces de noms (namespaces).
+
+Comment faire? Il suffit d'écrire celà tout en haut du fichier:
+#+BEGIN_SRC elisp
+(ns le-nom-de-mon-namespace)
+
+<…code ici…>
+#+END_SRC
+
+On peut créer des sous-namespaces:
+
+#+BEGIN_SRC elisp
+(ns mon-namespace.mon-sous-namespace)
+
+<…code ici…>
+#+END_SRC
+
+Ainsi, dans une application complète, par exemple un jeu on aurait:
+
+- mon-jeu
+  - vues
+    - menu
+    - niveaux
+      - niveau1
+      - niveau2
+  - logique
+    - règles
+    - physique
+  - données
+    - sauvegardes
+
+Le namespace ~niveau2~ s'écrit donc:
+#+BEGIN_SRC 
+(ns mon-jeu.vues.niveaux.niveau2)
+
+<…code ici…>
+#+END_SRC
+
+
+
+(importe tout depuis mon-jeu.vues.niveaux.niveau2)
+(importe depuis mon-jeu.vues.niveaux.niveau2 en tant que n2)
+(importe depuis mon-jeu.vues.niveaux.niveau1 en tant que n1)
+
+(n1/démarre)
+(mon-jeu.vues.niveaux.niveau2/démarre)
+
+
+(ns mon-jeu.vues.menu
+  (importe tout depuis …))

@@ -1,5 +1,5 @@
 #+title: Brainsfeed - Uncourse
-#+subtitle: 3 - Cons
+#+subtitle: 3 - Constructions & Lambdas
 #+date: \today
 
 --------
@@ -85,7 +85,7 @@ Quel est la valeur de :
 #+END_SRC
 
 
-* λ Lambda 
+* λ - Lambda 
 
 
 #+BEGIN_SRC elisp

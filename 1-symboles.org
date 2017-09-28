@@ -31,12 +31,12 @@ Mais attention  ~tarte aux pommes~ n'est pas un symbole dans notre cas. C'est tr
 
 ** Les symboles peuvent êtres égaux ou non
 
-\begin{align*}
-  tarte &= tarte \\
-  pomme &= pomme \\
-  pommes &= pommes \\
-  pomme &\neq pommes 
-\end{align*}
+#+BEGIN_SRC elisp
+  tarte = tarte 
+  pomme = pomme 
+  pommes = pommes 
+  pomme ≠ pommes 
+#+END_SRC
 
 Deux symboles sont égaux s'ils désignent la même chose.
 
@@ -50,11 +50,12 @@ Deux symboles sont égaux s'ils désignent la même chose.
  référence au même concept, alors on à trouvé un autre symbole, égal au premier.
  Par exemple: 
 
-\begin{align*}
- pom &\neq pomme \\
- ban &\neq banane \\
- coca &\neq cocaCola
-\end{align*}
+#+BEGIN_SRC elisp
+ pom ≠ pomme 
+ ban ≠ banane 
+ coca ≠ cocaCola
+#+END_SRC
+
 
  Ici ~coca~ et ~coca-cola~ désignent bien la même boisson. Mais ~coca~ et ~coca-cola~ ne sont pas le même symbole.
 
