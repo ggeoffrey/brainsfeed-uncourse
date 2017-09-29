@@ -65,10 +65,10 @@ Quel est la valeur de :
 
 
 #+BEGIN_SRC elisp 
-  (definir plat (tarte aux pommes))
-  plat ;; => (tarte aux pommes)
-  (definir x 5)
-  x ;; => 5
+(definir plat (tarte aux pommes))
+plat ;; => (tarte aux pommes)
+(definir x 5)
+x ;; => 5
 
 (definir x 5)
 (definir y 6)
@@ -76,17 +76,16 @@ Quel est la valeur de :
 
 (addition x z) ;; => 10
 
-(definir nom jean)
-(definir prenom pierre)
+(definir nom "jean")
+(definir prenom "pierre")
 
-(concatenation nom prenom)  ;; => jeanpierre
-(concatenation nom   prenom)  ;; => jean pierre 
+(concatenation nom prenom)  ;; => "jeanpierre"
+(concatenation nom " " prenom)  ;; => "jean pierre" 
 
 #+END_SRC
 
 
 * λ - Lambda 
-
 
 #+BEGIN_SRC elisp
 
@@ -101,6 +100,8 @@ Quel est la valeur de :
 ( (lambda (x y) (addition x y))  2 6  ) ;; =>  8
 #+END_SRC
 
+Le meilleur moyen de comprendre comment un lambda recoit des paramètres, c'est
+de faire le jeu du texte à trou et de remplacer les symboles par leur valeurs.
 
 #+BEGIN_SRC elisp 
 
